@@ -1,0 +1,7 @@
+numpy>=1.24
+openai>=1.0
+opencv-python>=4.8
+PyYAML>=6.0
+
+# Optional CoTracker backend:
+# torch>=2.0

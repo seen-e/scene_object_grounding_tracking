@@ -1,0 +1,43 @@
+model:
+  base_url: ${VLM_BASE_URL}
+  api_key: ${VLM_API_KEY}
+  model: Qwen3.8-Flash-Next
+  max_tokens: 16384
+  temperature: 0.0
+  top_p: 0.95
+  top_k: 0
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false
+  timeout: 1200
+  max_retries: 2
+
+bbox_tracking:
+  video: /path/to/video.mp4
+  scene_output_dir: /path/to/scene_output
+  output_dir: /path/to/bbox_output
+
+  # Track every Scene object, or use interaction_objects for task-related objects only.
+  object_source: objects
+  exclude_categories: []
+
+  anchor_interval_sec: 1.0
+  grid_step_px: 14
+  max_refinement_delta_1000: 120
+  max_refinement_rounds: 3
+  refinement_convergence_delta_1000: 3
+  required_consecutive_accurate_rounds: 2
+  local_crop_padding_ratio: 1.0
+  local_crop_min_size_px: 64
+  local_crop_long_side_px: 768
+
+  # auto uses CoTracker when both paths exist, otherwise OpenCV optical flow.
+  tracking_backend: auto
+  checkpoint: /path/to/cotracker/checkpoint.pth
+  cotracker_source: /path/to/co-tracker
+  device: cuda
+  cotracker_window_len: 60
+  points_per_object: 64
+  point_batch_size: 256
+  sample_inset_ratio: 0.08
+  min_visible_points: 6
